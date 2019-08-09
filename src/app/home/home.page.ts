@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, NavController, ModalController } from '@ionic/angular';
 import { NotesService } from '../services/notes.service';
+import { ApolloPage } from '../apollo/apollo.page';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,10 @@ import { NotesService } from '../services/notes.service';
 })
 export class HomePage implements OnInit {
 
-  constructor(public notesService: NotesService, private alertCtrl: AlertController, private navCtrl: NavController) { }
+  constructor(public notesService: NotesService,
+    private alertCtrl: AlertController,
+    private modalCtrl: ModalController,
+    private navCtrl: NavController) { }
 
   ngOnInit(): void {
     // this.notesService.load();
@@ -41,4 +45,12 @@ export class HomePage implements OnInit {
     })
   }
 
+  async viewQuery() {
+    console.log('Query!!!');
+    const modal = await this.modalCtrl.create({
+      component: ApolloPage
+    });
+
+    return await modal.present();
+  }
 }

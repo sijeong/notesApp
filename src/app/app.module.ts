@@ -18,14 +18,18 @@ import { AppEffects } from './app.effects';
 
 
 import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
-import { HttpLink } from 'apollo-angular-link-http';
+import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { HttpClientModule } from '@angular/common/http';
+import { ApolloPageModule } from './apollo/apollo.module';
+
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     AppRoutingModule,
@@ -38,7 +42,9 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([AppEffects]),
-    ApolloModule
+    ApolloModule,
+    HttpLinkModule,
+    ApolloPageModule
   ],
   providers: [
     StatusBar,
@@ -49,7 +55,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
         return {
           cache: new InMemoryCache(),
           link: httpLink.create({
-            uri: "http://localhost:4000/grapql"
+            uri: "http://localhost:4000/"
           })
         }
       },

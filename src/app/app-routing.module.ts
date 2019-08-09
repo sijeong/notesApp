@@ -5,6 +5,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'notes', pathMatch: 'full' },
   { path: 'notes', loadChildren: "./home/home.module#HomePageModule" },
   { path: 'notes/:id', loadChildren: './detail/detail.module#DetailPageModule' },
+  { path: 'apollo', loadChildren: './apollo/apollo.module#ApolloPageModule' },
 ];
 
 @NgModule({
